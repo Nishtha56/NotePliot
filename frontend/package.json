@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001810",
     "lucide-react": "^1.31.0",
     "next": "14.2.35",
     "react": "^18",

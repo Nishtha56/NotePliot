@@ -18,7 +18,7 @@ backend_dir = Path(__file__).resolve().parents[1]
 load_dotenv(backend_dir / ".env", override=False)
 load_dotenv(backend_dir.parent / ".env", override=False)
 
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "").strip().strip('"').strip("'")
 
 
 def hash_password(password: str) -> str:
@@ -42,23 +42,26 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 def verify_google_token(token: str) -> dict[str, str | None]:
     """Verify a Google ID token and return the claims needed by the app."""
-    if not GOOGLE_CLIENT_ID:
-        raise ValueError("Google sign-in is not configured on the backend. Set GOOGLE_CLIENT_ID.")
+    client_id = os.getenv("GOOGLE_CLIENT_ID", "").strip().strip('"').strip("'") or GOOGLE_CLIENT_ID
+    if not client_id:
+        raise ValueError("Google sign-in is not configured on the backend. Please set GOOGLE_CLIENT_ID.")
 
     try:
         claims = id_token.verify_oauth2_token(
             token,
             google_requests.Request(),
-            GOOGLE_CLIENT_ID,
+            client_id,
         )
     except ValueError as exc:
         raise ValueError(f"Google token verification failed: {exc}") from exc
+    except Exception as exc:
+        raise ValueError(f"Unexpected error during Google token verification: {exc}") from exc
 
     google_id = claims.get("sub")
     email = claims.get("email")
-    name = claims.get("name") or email
-    if not google_id or not email or not name or not claims.get("email_verified"):
-        raise ValueError("Google account information is incomplete")
+    name = claims.get("name") or claims.get("given_name") or email
+    if not google_id or not email or not name:
+        raise ValueError("Google account information is incomplete (missing ID, email, or name)")
 
     return {
         "google_id": google_id,

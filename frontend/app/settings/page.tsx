@@ -141,7 +141,7 @@ export default function SettingsPage() {
               </div>
               <div>
                 <h2 className="text-base font-bold text-slate-900">Workspace Integrations</h2>
-                <p className="text-xs text-slate-500">Connect Fireflies assistant to your calendar & platforms</p>
+                <p className="text-xs text-slate-500">Connect NotePilot assistant to your calendar & platforms</p>
               </div>
             </div>
             <span className="text-xs bg-purple-100 text-purple-700 font-semibold px-2.5 py-1 rounded-full">

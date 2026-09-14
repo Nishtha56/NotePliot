@@ -1,8 +1,8 @@
-# Fireflies.ai Clone - Meeting Notes & Transcription Platform
+# NotePilot - Meeting Notes & Transcription Platform
 
-A full-stack, production-quality meeting intelligence platform inspired by **Fireflies.ai**. Built for SDE evaluation, this platform features an interactive meeting library dashboard, timestamp-synchronized transcripts, AI-generated summaries, chapter outlines, action item task management, and modern SaaS workspace UX.
+A full-stack, production-quality meeting intelligence platform. Built for SDE evaluation, this platform features an interactive meeting library dashboard, timestamp-synchronized transcripts, AI-generated summaries, chapter outlines, action item task management, and modern SaaS workspace UX.
 
-![Fireflies App Workspace](https://img.shields.io/badge/Fireflies.ai-Clone-purple.svg)
+![NotePilot App Workspace](https://img.shields.io/badge/NotePilot-Platform-purple.svg)
 ![Tech Stack](https://img.shields.io/badge/Next.js-FastAPI-blue.svg)
 ![Database](https://img.shields.io/badge/SQLite-SQLAlchemy-emerald.svg)
 

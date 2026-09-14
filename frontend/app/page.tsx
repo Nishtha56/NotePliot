@@ -90,7 +90,7 @@ export default function Dashboard() {
               <Sparkles className="w-3.5 h-3.5" /> Workspace Meeting Intelligence
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              Welcome back{user ? `, ${user.name}` : " to Fireflies"}!
+              Welcome back{user ? `, ${user.name}` : " to NotePilot"}!
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
               Your central hub for transcript processing, executive summaries, and action item automation.

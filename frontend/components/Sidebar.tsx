@@ -56,7 +56,7 @@ export default function Sidebar() {
             </div>
             <div>
               <span className="font-bold text-lg text-white tracking-tight flex items-center gap-1">
-                Fireflies<span className="text-purple-400 font-extrabold">.ai</span>
+                NotePilot<span className="text-purple-400 font-extrabold">.ai</span>
               </span>
               <span className="text-[10px] text-purple-300/80 font-medium tracking-wider uppercase block -mt-1">
                 Workspace Enterprise

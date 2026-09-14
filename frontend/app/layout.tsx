@@ -9,7 +9,7 @@ import { AuthProvider } from "@/lib/auth-context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fireflies.ai - Meeting Notes & Transcription Workspace",
+  title: "NotePilot - Meeting Notes & Transcription Workspace",
   description:
     "Automate your meeting notes, transcripts, summaries, and action item workflows.",
 };

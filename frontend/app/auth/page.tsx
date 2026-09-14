@@ -98,10 +98,10 @@ export default function AuthPage() {
     try {
       // Demo user credentials
       try {
-        await login("demo@fireflies.ai", "demo123456");
+        await login("demo@notepilot.ai", "demo123456");
       } catch {
         // If demo user doesn't exist yet, sign up automatically
-        await signup("demo@fireflies.ai", "demo123456", "Demo Workspace User");
+        await signup("demo@notepilot.ai", "demo123456", "Demo Workspace User");
       }
       showToast("Signed in as Demo User", "Redirecting to workspace...", "success");
       router.push("/");
@@ -122,7 +122,7 @@ export default function AuthPage() {
           </div>
           <div>
             <span className="font-bold text-lg text-white tracking-tight flex items-center gap-1">
-              Fireflies<span className="text-purple-400 font-extrabold">.ai</span>
+              NotePilot<span className="text-purple-400 font-extrabold">.ai</span>
             </span>
             <span className="text-[10px] text-purple-300/80 font-medium tracking-wider uppercase block -mt-1">
               Workspace Enterprise
@@ -157,7 +157,7 @@ export default function AuthPage() {
             </h1>
 
             <p className="text-sm text-slate-400 leading-relaxed">
-              Sign in to your Fireflies workspace to transcribe calls, generate summaries, and assign action items automatically.
+              Sign in to your NotePilot workspace to transcribe calls, generate summaries, and assign action items automatically.
             </p>
 
             <div className="space-y-3 pt-2">

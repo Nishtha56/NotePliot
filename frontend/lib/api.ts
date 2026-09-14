@@ -6,7 +6,9 @@ import {
   ActionItem,
   CreateActionItemPayload,
   UpdateActionItemPayload,
-  Summary
+  Summary,
+  TranscriptSegment,
+  Topic,
 } from "@/types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -19,11 +21,20 @@ async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
     ...((options?.headers as Record<string, string>) || {}),
   };
 
-  const res = await fetch(url, {
-    ...options,
-    credentials: "include",
-    headers,
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      ...options,
+      credentials: "include",
+      headers,
+    });
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : "Network request failed";
+    console.error(`[NotePilot API Error] Failed to connect to ${url}:`, err);
+    throw new Error(
+      `Cannot connect to backend server at ${API_BASE_URL}. Please ensure the FastAPI backend is running on port 8000. (${errorMsg})`
+    );
+  }
 
   if (!res.ok) {
     let errorMsg = `HTTP Error ${res.status}: ${res.statusText}`;
@@ -41,6 +52,11 @@ async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
   }
 
   return res.json();
+}
+
+// Health Check API
+export async function checkBackendHealth(): Promise<{ status: string; service: string }> {
+  return fetchJSON<{ status: string; service: string }>(`${API_BASE_URL}/api/health`);
 }
 
 // Meetings API
@@ -85,6 +101,42 @@ export async function deleteMeeting(id: number): Promise<void> {
   });
 }
 
+// Transcript Segments API
+export async function getTranscript(meetingId: number): Promise<TranscriptSegment[]> {
+  return fetchJSON<TranscriptSegment[]>(`${API_BASE_URL}/api/meetings/${meetingId}/transcript`);
+}
+
+export async function addTranscriptSegment(
+  meetingId: number,
+  data: { speaker: string; start_time: number; end_time: number; text: string }
+): Promise<TranscriptSegment> {
+  return fetchJSON<TranscriptSegment>(`${API_BASE_URL}/api/meetings/${meetingId}/transcript`, {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function updateTranscriptSegment(
+  segmentId: number,
+  data: Partial<{ speaker: string; start_time: number; end_time: number; text: string }>
+): Promise<TranscriptSegment> {
+  return fetchJSON<TranscriptSegment>(`${API_BASE_URL}/api/transcript/${segmentId}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteTranscriptSegment(segmentId: number): Promise<void> {
+  return fetchJSON<void>(`${API_BASE_URL}/api/transcript/${segmentId}`, {
+    method: "DELETE",
+  });
+}
+
+// Topics API
+export async function getTopics(meetingId: number): Promise<Topic[]> {
+  return fetchJSON<Topic[]>(`${API_BASE_URL}/api/meetings/${meetingId}/topics`);
+}
+
 // Action Items API
 export async function createActionItem(meetingId: number, data: CreateActionItemPayload): Promise<ActionItem> {
   return fetchJSON<ActionItem>(`${API_BASE_URL}/api/meetings/${meetingId}/actions`, {
@@ -119,3 +171,4 @@ export async function updateSummary(meetingId: number, data: { overview?: string
     body: JSON.stringify(data),
   });
 }
+

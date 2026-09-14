@@ -77,12 +77,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [getAuthHeaders]);
 
   const login = async (email: string, password: string): Promise<User> => {
-    const res = await fetch(`${API_BASE}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
-    });
+    let res: Response;
+    try {
+      res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+    } catch (err: unknown) {
+      throw new Error(`Unable to connect to auth server at ${API_BASE}. Please verify that the FastAPI backend is running.`);
+    }
 
     const data = await res.json();
     if (!res.ok) {
@@ -97,12 +102,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signup = async (email: string, password: string, name: string): Promise<User> => {
-    const res = await fetch(`${API_BASE}/api/auth/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, password, name }),
-    });
+    let res: Response;
+    try {
+      res = await fetch(`${API_BASE}/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password, name }),
+      });
+    } catch (err: unknown) {
+      throw new Error(`Unable to connect to auth server at ${API_BASE}. Please verify that the FastAPI backend is running.`);
+    }
 
     const data = await res.json();
     if (!res.ok) {
