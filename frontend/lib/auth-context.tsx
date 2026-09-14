@@ -85,7 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         credentials: "include",
         body: JSON.stringify({ email, password }),
       });
-    } catch (err: unknown) {
+    } catch {
       throw new Error(`Unable to connect to auth server at ${API_BASE}. Please verify that the FastAPI backend is running.`);
     }
 
@@ -110,7 +110,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         credentials: "include",
         body: JSON.stringify({ email, password, name }),
       });
-    } catch (err: unknown) {
+    } catch {
       throw new Error(`Unable to connect to auth server at ${API_BASE}. Please verify that the FastAPI backend is running.`);
     }
 
