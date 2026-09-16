@@ -1,4 +1,4 @@
-# NotePilot - Meeting Notes & Transcription Platform
+# NotePilot - Meeting Notes & Transcription Platform 
 
 A full-stack, production-quality meeting intelligence platform. Built for SDE evaluation, this platform features an interactive meeting library dashboard, timestamp-synchronized transcripts, AI-generated summaries, chapter outlines, action item task management, and modern SaaS workspace UX.
 
