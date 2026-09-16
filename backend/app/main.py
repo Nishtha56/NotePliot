@@ -11,8 +11,11 @@ load_dotenv(backend_dir.parent / ".env", override=False)
 
 from app.database import engine, Base
 from app.routers import meetings, transcripts, summaries, actions, topics, auth
+from app.seed import seed_if_empty, seed_database
 
 Base.metadata.create_all(bind=engine)
+# Ensure demo meetings are automatically seeded on startup if database is empty
+seed_if_empty()
 
 app = FastAPI(
     title="NotePilot - Meeting Intelligence API",
@@ -68,4 +71,10 @@ def root():
 @app.get("/api/health")
 def health_check():
     return {"status": "ok", "service": "NotePilot Backend API"}
+
+@app.post("/api/seed")
+@app.get("/api/seed")
+def trigger_seed():
+    seed_if_empty()
+    return {"status": "ok", "message": "Demo data checked/seeded successfully"}
 
