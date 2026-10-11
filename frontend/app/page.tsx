@@ -14,7 +14,7 @@ import {
   Sparkles,
   Plus,
   ArrowRight,
-  Bot,
+  Mic,
   ListTodo,
   FileText,
   AlertTriangle
@@ -114,10 +114,10 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-start gap-4">
             <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
-              <Bot className="w-5 h-5" />
+              <Mic className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Fred AI Assistant</h3>
+              <h3 className="text-sm font-bold text-slate-900">AI Transcripts</h3>
               <p className="text-xs text-slate-500 mt-0.5">Auto-transcribes calls with speaker identification</p>
             </div>
           </div>

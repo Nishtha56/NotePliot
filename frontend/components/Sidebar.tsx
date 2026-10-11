@@ -8,7 +8,6 @@ import {
   Video,
   Settings,
   Flame,
-  Bot,
   Zap,
   LogOut,
   UserCheck,
@@ -65,27 +64,8 @@ export default function Sidebar() {
           </Link>
         </div>
 
-        {/* Live Bot Assistant Badge */}
-        <div className="mx-4 mt-5 p-3 rounded-xl bg-slate-800/60 border border-slate-700/50 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="relative">
-              <div className="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
-                <Bot className="w-4 h-4" />
-              </div>
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-slate-900 animate-pulse" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-white">Fred Bot</p>
-              <p className="text-[10px] text-slate-400">Ready to join calls</p>
-            </div>
-          </div>
-          <span className="text-[10px] font-medium text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20">
-            Active
-          </span>
-        </div>
-
         {/* Primary Navigation */}
-        <nav className="p-4 space-y-1.5 mt-2">
+        <nav className="p-4 space-y-1.5">
           <div className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
             Navigation
           </div>
